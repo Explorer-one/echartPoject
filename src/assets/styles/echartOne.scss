@@ -1,0 +1,565 @@
+/*清除元素默认的内外边距  */
+
+/* h3 {
+  font-size: 0.25rem;
+  color: #fff;
+  font-weight: 400;
+}
+ span{
+   font-size: 16px;
+  color: #4c9bfd;
+} */
+
+/* a {
+  color: #666;
+  text-decoration: none;
+} */
+
+a:hover {
+  color: #e33333;
+}
+// body{
+//   background: url(../images/imgOne/bg.jpg) no-repeat 0 0 / cover;
+//   line-height: 1.15;
+// }
+/* // 实现rem适配 */
+// @media screen and (max-width: 1024px) {
+//   html {
+//     font-size: 42.66px !important;
+//   }
+// }
+
+// @media screen and (min-width: 1920px) {
+//   html {
+//     font-size: 80px !important;
+//   }
+// }
+.viewportBox{
+  // display: flex;
+  min-width: 1024px;
+  max-width: 1920px;
+  min-height: 780px;
+  margin:  0 auto;
+  // background: url(../images/imgOne/logo.png) no-repeat 0 0 / contain;
+  // background: url(../images/imgOne/bg.jpg) no-repeat 0 0 / cover;
+  background: url(../images/imgOne/bg.jpg) no-repeat 0 0 / cover;
+  // line-height: 1.15;
+  // padding: 1.1rem .25rem 0;
+  .headerBg {
+    width: 100%;
+    height: 90px;
+    background: url(../images/imgOne/logo.png) no-repeat 0 0 / contain;
+    background-size: 100% 100%;
+  }
+  .boardPage {
+    display: flex;
+    line-height: 1.15;
+    padding: .25rem .25rem 0;
+    .column{
+      flex: 3;
+      /* background-color: pink; */
+    
+    }
+    .column:nth-child(2){
+      flex: 4;
+      margin: .4rem .25rem 0;
+    }
+    /* 公共面板样式 */
+    .panel {
+      position: relative;
+      border: 15px solid tomato;
+      border-width: .6375rem  .475rem .25rem 1.65rem;
+      border-image-source: url(../images/imgOne/border.png);
+      border-image-slice: 51 38 20 132;
+      margin-bottom: .25rem;
+    }
+    .inner{
+      position: absolute;
+      top: -0.6375rem;
+      right: -0.475rem;
+      bottom: -0.25rem;
+      left: -1.65rem;
+      padding: .3rem .45rem;
+    }
+    .panel h3 {
+      font-size: 0.25rem;
+      color: #fff;
+      font-weight: 400;
+    }
+    /* 概览区域模块制作 */
+    .overview{
+        height: 1.375rem;
+    }
+    
+    .overview ul{
+      display: flex;
+      justify-content: space-between;
+    }
+    .overview ul li h4{
+    font-size: .35rem;
+    color: #fff;
+    margin: 0 0 .1rem .06rem;
+    
+    }
+    .overview ul li span{
+      font-size: .2rem;
+      color: #4c9bfd;
+    }
+    .monitor{
+      height: 6rem
+    }
+    .monitor .inner{
+      padding: .3rem 0;
+      display: flex;
+      flex-direction: column;
+    } 
+    .monitor .tabs{
+      padding: 0 .45rem;
+      margin-bottom: 0.225rem;
+      display: flex;
+      /* 不一样的地方 */
+    }
+    .monitor .tabs a{
+      color:#1950c4;
+      font-size: .225rem;
+      padding: 0 .3375rem;
+    }
+    .monitor .tabs a:nth-child(1){
+      padding-left: 0;
+      border-right: .025rem solid #00f2f1;
+    }
+    .monitor .tabs a.active{
+      color: white;
+    }
+    .monitor .content{
+      display: none;
+      position: relative;
+      flex: 1;
+    }
+    .monitor .head{
+      display: flex;
+      justify-content: space-between;
+      line-height: 1.05;
+      background-color:rgba(255, 255, 255, 0.1) ;
+      padding: .15rem .45rem;
+      color: #68d8fe ;
+      font-size: .175rem;
+    }
+    .monitor .row{
+      display: flex;
+      justify-content: space-between;
+      line-height: 1.05;
+      padding: .15rem .45rem;
+      color: #68d8ff ;
+      font-size: .15rem
+    }
+    .monitor .marquee-view{
+      position: absolute;
+      top: 0.5rem;
+      bottom: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+    .monitor .row .icon-cup3{
+      position: absolute;
+      left: 0.2rem;
+      opacity: 0;
+    }
+    .monitor .row:hover{
+      background-color:rgba(255, 255, 255, 0.1) ;
+      color: #68d8fe;
+    }
+    .monitor .row .icon-cup3:hover{
+      opacity: 1;
+    }
+    
+    .monitor .col:nth-child(2){
+      width: 1rem;
+    }
+    .monitor .col:nth-child(3){
+      width: 2.5rem;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .monitor .col:nth-child(4){
+      width: 1rem;
+    }
+    /* 通过CSS3动画滚动marquee */
+    .marquee-view .marquee{
+      animation: move 12s linear infinite;
+    }
+    @keyframes move{
+      0%{
+    
+      }
+      100%{
+        transform: translateY(-50%);
+      }
+    }
+    /* 点位分布统计模块制作 */
+    .point{
+      height:4.25rem;
+    }
+    .point .chart{
+      display: flex;
+      justify-content: space-between;
+      margin-top: .3rem;
+    }
+    .chart .pie{
+      /* background-color: pink; */
+      width: 3.9rem;
+      height: 3rem;
+      margin-left: -0 .125rem;
+    }
+    .chart .date{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 2.1rem;
+      padding: .45rem .375rem;
+      box-sizing:border-box;
+      background-image: url(../images/imgOne/rect.png);
+      background-size: cover;
+    }
+    .point h4 {
+      margin-bottom: 0.15rem;
+      font-size: 0.35rem;
+      color: #fff;
+    }
+    .point span {
+      display: block;
+      color: #4c9bfd;
+      font-size: 0.2rem;
+    }
+    /* 地图区域样式 */
+    .map{
+      height: 7.225rem;
+      margin-bottom: .25rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .map h3{
+      margin: 0;
+      line-height: 1;
+      padding: .2rem 0;
+      font-size: 0.25rem;
+      color: #fff;
+      font-weight: 400;
+    }
+    .map .chart{
+      flex: 1;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    .map .geo{
+      width: 100%;
+      height: 100%;
+    }
+    /* 用户统计样式 */
+    .user{
+      height: 4.25rem;
+      display: flex;
+    }
+    .user .chart{
+      display: flex;
+      margin-top: .3rem;
+    }
+    .user .bar{
+      width: 7.35rem;
+      height: 3rem;
+    }
+    .user .data{
+      width: 2rem; 
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      box-sizing: border-box;
+      padding: .45rem .375rem;
+      background-image: url(../images/imgOne/rect.png);
+      background-size: cover;
+    }
+    .user h4 {
+      margin-bottom: 0.15rem;
+      font-size: 0.35rem;
+      color: #fff;
+    }
+    .user span {
+      display: block;
+      color: #4c9bfd;
+      font-size: 0.2rem;
+    }
+    /* 订单区域样式 */
+    .order{
+      height: 1.875rem;
+    }
+    .order .filter{
+      display: flex;
+    }
+    .order .filter a{
+      display: block;
+      height: .225rem;
+      line-height: 1;
+      padding: 0 .225rem;
+      color:#1950c4;
+      font-size: .225rem;
+      border-right:.025rem solid #00f2f1;
+    }
+    .order .filter a:first-child{
+     padding-left: 0;
+    }
+    .order .filter a:last-child{
+      border-right:0;
+    }
+    .order .filter .active{
+      color: #fff;
+      font-size: .25rem;
+    }
+    .order .data{
+      display: flex;
+      margin-top: .25rem;
+    }
+    .order .item{
+      width: 50%;
+    }
+    .order h4 {
+      font-size: 0.35rem;
+      color: #fff;
+      margin-bottom: 0.125rem;
+    }
+    .order span {
+      display: block;
+      color: #4c9bfd;
+      font-size: 0.2rem;
+    }
+    /* 销售统计样式 */
+    .sales{
+      height: 3.1rem;
+    }
+    .sales .caption{
+      display: flex;
+      line-height: 1;
+    }
+    .sales h3{
+      border-right: .025rem solid #00f2f1;
+      padding-right: .225rem;
+      height: .225rem;
+    }
+    .sales .caption a{
+      padding: .05rem;
+      font-size: .2rem;
+      color: #0bace0;
+      border-radius: .0375rem;
+      margin: -.0375rem 0 0 0.2625rem;
+    }
+    .sales a.active{
+      background-color: #4c9bfd;
+      color: #fff;
+    }
+    .sales .inner{
+      display: flex;
+      flex-direction: column;
+    }
+    .sales .chart{
+      position: relative;
+      flex: 1;
+      padding-top: 0.1875rem;
+    }
+    .sales .label{
+      position: absolute;
+      top: .15rem;
+      left: .225rem;
+      font-size: .175rem;
+      color: #4996f5;
+    }
+    .sales .line{
+     width: 100%;
+     height: 100%;
+    }
+    /* 渠道区域&销售进度样式 */
+    .wrap {
+      display: flex;
+    }
+    .wrap .channel,
+    .wrap .quarter {
+      flex: 1;
+      height: 2.9rem;
+    }
+    .wrap .channel{
+      margin-right: .25rem;
+    }
+    .channel .data{
+      overflow: hidden;
+    }
+    .channel .radar{
+      height: 2.1rem;
+      width: 100%;
+    }
+    .channel h4 {
+      color: #fff;
+      font-size: 0.4rem;
+      margin-bottom: 0.0625rem;
+    }
+    .channel small {
+      font-size: 50%;
+    }
+    .channel span {
+      display: block;
+      color: #4c9bfd;
+      font-size: 0.175rem;
+    }
+    .channel h3 {
+      color: #fff;
+      font-size: 0.25rem;
+      margin-bottom: 0.0625rem;
+    }
+    /* 季度区块 */
+    .quarter .inner{
+      display: flex;
+      flex-direction: column;
+      margin: 0 -0.075rem;
+    }
+    .quarter .chart{
+      flex: 1;
+      padding-top: .225rem
+    }
+    .quarter .box{
+      position: relative;
+    }
+    .quarter .gauge{
+      height: 1.05rem;
+    }
+    .quarter .label{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-30%);
+      color: #fff;
+      font-size: 0.375rem;
+    }
+    .quarter .label small {
+      font-size: 50%;
+    }
+    .quarter .data{
+      display: flex;
+      justify-content: space-between;
+    }
+    .quarter .item{
+        width: 50%;
+      }
+    .quarter h4 {
+      color: #fff;
+      font-size: 0.3rem;
+      margin-bottom: 0.125rem;
+    }
+    .quarter span {
+      display: block;
+      width: 100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      color: #4c9bfd;
+      font-size: 0.175rem;
+      transform: scale(0.9);
+    }
+    /* 热销排行样式 */
+    .top{
+      height:3.5rem
+    }
+    .top .inner{
+      display: flex;
+    }
+    .top .all{
+      width: 2.1rem;
+      font-size: 0.175rem;
+      color: #4c9bfd;
+      display: flex;
+      flex-direction: column;
+      vertical-align: middle;
+    }
+    .top .all ul{
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: space-around;
+      margin-top: .15rem;
+      margin-left: .15rem;
+    }
+    .top.all ul li{
+      overflow: hidden;
+    }
+    .top .all .icon-cup1{
+      font-size: .45rem;
+      vertical-align: middle;
+      margin-right: .15rem;
+    }
+    .top .province{
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      color: #fff;
+    }
+    .top .province i{
+      float: right;
+      color: #0bace6;
+      font-size: .175rem;
+      font-style: normal;
+      padding:0 .15rem;
+      margin-top: .0625rem;
+    }
+    .top .province .data{
+      display: flex;
+       flex: 1;
+      margin-top: 0.175rem;
+      
+    }
+    .top .province ul{
+      flex: 1;
+      line-height: 1;
+       margin-bottom: 0.175rem;
+    }
+    .top .province ul li{
+      display: flex;
+      justify-content: space-between;
+    }
+    .top .province .sup li{
+      color: #4996f5;
+      padding: 0.125rem 0.15rem;
+    }
+    .top .province .sup li.active{
+      color: #a3c6f3;
+      background-color: rgba(10, 67, 188, 0.2);
+    }
+    .top .province .icon-down{
+      color: #dc3c33;
+    }
+    
+    .top .province .icon-up{
+      color: #36be36;
+    }
+    .top .province s{
+      text-decoration: none;
+      transform: scale(0.8);
+      display: block;
+    }
+    .top .province ul.sub{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      font-size: 0.15rem;
+      background-color: rgba(10, 67, 188, 0.2);
+    }
+    .top .province ul.sub li{
+      color: #52ffff;
+      padding: 0.0625rem 0.15rem;
+    
+    }
+    @media screen and (max-width: 1600px) {
+     .top .province .sup li{
+       padding:0.125rem 0.175rem;
+     }
+    }
+  }
+}
+
+
+

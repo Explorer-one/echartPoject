@@ -1,0 +1,141 @@
+@import "@/assets/styles/_var.scss";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/*让所有斜体 不倾斜*/
+em,
+i {
+  font-style: normal;
+}
+/*去掉列表前面的小点*/
+li {
+  list-style: none;
+}
+/*图片没有边框   去掉图片底侧的空白缝隙*/
+img {
+  border: 0; /*ie6*/
+  vertical-align: middle;
+}
+/*让button 按钮 变成小手*/
+button {
+  cursor: pointer;
+}
+/*取消链接的下划线*/
+h4{
+  color: #fff;
+  font-weight: 400;
+}
+html,body{
+  height: 100%;
+  margin: 0;
+  // color: #fff;
+  background: #fafafa;
+}
+a{
+  text-decoration: none;
+  color: #222;
+}
+.box{
+  width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.white-bg{
+  background: #fff;
+}
+
+.flex {
+  display: flex;
+
+  &-1 {
+    flex: 1;
+  }
+
+  &.is-vertical {
+    flex-direction: column;
+  }
+  &-wrap{
+    flex-wrap: wrap;  
+  }
+
+  &:before,
+  &:after {
+    display: none;
+  }
+
+  &.justify-center {
+    justify-content: center;
+  }
+  &.justify-end {
+    justify-content: flex-end;
+  }
+  &.justify-space-between {
+    justify-content: space-between;
+  }
+  &.justify-space-around {
+    justify-content: space-around;
+  }
+
+  &.align-middle {
+    align-items: center;
+  }
+  &.align-bottom {
+    align-items: flex-end;
+  }
+  &-shink-0{
+    flex-shrink: 0;
+  }
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+.clearfix{
+  &::after{
+   visibility: hidden;
+   display: block;
+   content: " ";
+   font-size: 0;
+   height: 0;
+   clear: both;
+  }
+}
+.mt{
+  margin-top: 20px;
+}
+.mb{
+  margin-bottom: 20px;
+}
+.mt8{
+  margin-top: 8px;
+}
+.is-right{
+  text-align:right;
+}
+.is-left{
+  text-align:left;
+}
+.is-center{
+  text-align:center;
+}
+
+*{
+  box-sizing: border-box;
+}
+.cursor{
+  cursor: pointer;
+}
+i,em{
+  font-style: normal;
+}
+ul,li{
+  margin: 0;
+  padding: 0;
+}
+ul{
+  list-style: none;
+}

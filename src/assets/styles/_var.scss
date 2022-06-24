@@ -1,0 +1,61 @@
+$table-header-background-color :red;
+$table-border-color:#fff;
+$border-color-base:yellow;
+
+// button 颜色
+$color-primary: #1c63f3;
+$color-primary-hover:#6895f0;
+$color-warning: #ef9a11;
+$color-warning-hover:#f2ae41;
+$color-success: #28a745;
+$color-success-hover: #53b96a; 
+$color-danger: #e61212;
+$color-danger-hover: #f35252;
+
+// 文本和图标 颜色
+$txt-blue:#2873de;
+$txt-blue-hover:#3288e2;
+$txt-blue-dark:#4775a7;
+$txt-green:#13b745;
+$txt-green-hover:#138a44;
+$txt-red:#ff442b;
+$txt-red-hover:#dd220a;
+$txt-orange:#efa300;
+$txt-orange-hover:#c88c0a;
+$txt-gray:#bbbfcc;
+
+$colors: (
+  success: $color-success,
+  primary: $color-primary,
+  warning: $color-warning,
+  danger: $color-danger,
+  txt-blue:$txt-blue,
+  txt-green:$txt-green,
+  txt-red:$txt-red,
+  txt-orange:$txt-orange,
+  txt-gray:$txt-gray
+);
+
+@each $name, $c in $colors {
+  .text-#{$name} {
+    color: $c !important;
+  }
+  .bg-#{$name} {
+    background-color: $c;
+  }
+}
+
+// main
+$main-padding-number: 20 !default;
+
+$main-padding: $main-padding-number + px !default;
+
+// footer
+$footer-height-number: 45 !default;
+
+$footer-height: $footer-height-number + px !default;
+
+:export {
+  headerHeight: $footer-height-number;
+  mainPadding: $main-padding-number;
+}
