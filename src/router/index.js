@@ -11,7 +11,7 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: () => import('@/views/layout'),
-      redirect: '/home',
+      redirect: '/frontDesk',
       children: [
         // {
         //   path: '/modePage',
@@ -21,6 +21,45 @@ const router = new Router({
         //   },
         //   component: () => import('@/views/ModePage')
         // }
+        {
+          path: '/frontDesk',
+          name: 'forntDesk',
+          meta: {
+            title: '首页',
+            icon: ''
+          },
+          component: () => import('@/views/FrontDesk.vue')
+        },
+        {
+          path: '/editCenter',
+          redirect: '/editWork',
+          name: 'editWork',
+          meta: {
+            title: '编辑中心',
+            icon: 'el-icon-price-tag'
+          },
+          component: () => import('@/views/ChildLayout.vue'),
+          children: [
+            {
+              path: '/editCenter/editWork',
+              name: 'editWork',
+              meta: {
+                title: '编辑器一',
+                icon: 'el-icon-chat-dot-round'
+              },
+              component: () => import('@/views/EditCenter/Codemirror.vue')
+            }
+            // {
+            //   path: '/editCenter/editWork',
+            //   name: 'editWork',
+            //   meta: {
+            //     title: '编辑器一',
+            //     icon: 'el-icon-chat-dot-round'
+            //   },
+            //   component: () => import('@/views/EditCenter/Codemirror.vue')
+            // }
+          ]
+        }
       ]
     },
     {

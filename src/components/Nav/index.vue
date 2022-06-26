@@ -1,29 +1,32 @@
 <template>
-  <div class="navbar">
-    <template v-for="(item,i) in routes">
-      <template  v-if="item.meta && item.meta.title && !item.meta.hidden">
-          <template v-if="item.meta.dropDown">
-            <i v-if="item.meta.icon" :class="item.meta.icon" :key="i+'i'"></i>
-            <el-dropdown :key="i" @command="goPage">
-              <span class="el-dropdown-link cursor" :class="activename.startsWith(item.path) ? 'active':''">
-                <i class="dsicon ds-shujujieru"></i>{{item.meta.title}}<i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown" class="navbar dropdown-css-k">
-                <template v-for="(it,ii) in item.children">
-                  <el-dropdown-item v-if="it.meta && it.meta.title && (!it.meta.usertype || (it.meta.usertype && $store.state.app.usertype && $store.state.app.usertype != '1' ))" :key="ii" :command=" '/' + item.path + '/' + it.path">
-                      {{it.meta.title}}
-                  </el-dropdown-item>
-                </template>
-              </el-dropdown-menu>
-            </el-dropdown>
+  <div class="navbar_page">
+    <div class="navbar">
+      <div class="logo">
+        <span v-if="!collapsedTitle">作业中心</span>
+      </div>
+      <div>
+      <el-menu
+        :default-active="path"
+        class="el-menu-vertical-demo"
+        :router="true"
+      >
+          <template v-for="(item, index) in routes">
+            <template v-if="item.children && item.children.length">
+                <template slot="title"> <i v-if="item.meta.icon" :class="item.meta.icon"></i>{{item.meta.title}}</template>
+              <el-submenu  :index="item.path" :key="index">
+                <el-menu-item v-for="(it,i) in item.children" :key="i" :index="it.path"><i v-if="it.meta.icon" :class="it.meta.icon"></i>{{it.meta.title}}</el-menu-item>
+              </el-submenu>
+            </template>
+            <template v-else >
+              <el-menu-item  :index="item.path" :key="index">
+                <i class="el-icon-setting"></i>
+                <span slot="title">{{item.meta.title}}</span>
+              </el-menu-item>
+            </template>
           </template>
-          <template v-else>
-            <router-link class="navbar-item" v-if="item.meta && item.meta.title && (!item.meta.usertype || (item.meta.usertype && $store.state.app.usertype && $store.state.app.usertype != '1' ))" :to="item.path=='/'? (item.redirect? '/' + item.redirect:item.path): '/' + item.path" :key="i">
-              <i v-if="item.meta.icon" :class="item.meta.icon"></i>{{item.meta.title}}
-            </router-link>
-          </template>
-      </template>
-    </template>
+        </el-menu>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -31,18 +34,33 @@ export default {
   name: 'navbar',
   data () {
     return {
-      routes: []
-    }
-  },
-  computed: {
-    activename: function () {
-      const path = this.$route.path.replace(/\//g, '')
-      return path
+      routes: [],
+      openeds: ['/frontDesk'],
+      collapsed: '',
+      width: '100px',
+      collapsedTitle: false,
+      path: '/frontDesk'
     }
   },
   methods: {
-    goPage (path) {
-      this.$router.replace({ path: '/redirect', query: { path } })
+    // handleOpen (key, keyPath) {
+    //   console.log('111111', key, keyPath)
+    // },
+    // handleClose (key, keyPath) {
+    //   console.log('2222', key, keyPath)
+    // },
+    hasSubmenu (item) {
+      console.log(Array.isArray(item.children) && item.children.length > 0)
+      return Array.isArray(item.children) && item.children.length > 0
+    },
+    // a标签路由禁止点击跳转
+    linkClickHandle (e) {
+      if (e && e.preventDefault) {
+        e.preventDefault()
+      } else {
+        window.event.returnValue = false // 兼容IE
+      }
+      return false
     }
   },
   mounted () {
@@ -52,87 +70,81 @@ export default {
     if (routes.length && routes[0].children) {
       this.routes = routes[0].children
     }
+    console.log('this.routes', this.routes)
   }
 }
 </script>
 <style lang="scss">
-$font-size:18px;
-.navbar{
-  min-width: 1042px;;
-  font-size: $font-size;
-  margin: 0 !important;
-  &-item{
-    display: inline-block;
-    padding:8px 26px;
-    line-height: 28px;
-    color: rgba($color: #fff, $alpha: 0.7);
-    &.router-link-exact-active,&.router-link-active{
-      color: #fff;
-      font-weight:bold;
-      background: rgba($color: #000, $alpha: 0.2);
-      border-radius: 23px;
-      text-decoration:none;
-    }
-    .dsicon{
-      font-size: 19px;
-      margin-right: 3px;
-    }
-    &:hover{
-     text-decoration:none;
-    }
-  }
-  &-item + &-item,&-item + .el-dropdown, .el-dropdown + &-item{
-    margin-left: 35px;
-  }
-  .el-dropdown{
-      color: #b0d9ff !important;
-      font-size: $font-size;
-      .el-dropdown-link{
-        padding: 9px 26px;
-        &:hover{
-          color: white;
-        }
+$nav-width: 200px;
+$nav-width-collapse: 64px;
+$transition: 0.3s ease-in-out;
+
+// .aside {
+//   z-index: 2;
+//   height: 100%;
+//   overflow: hidden;
+//   overflow-y: auto;
+//   background-color: #2B333E;
+//   box-shadow: 2px 0 3px rgba(0, 21, 41, 0.35);
+//   transition: width $transition;
+
+//   .iconfont {
+//     display: inline-block;
+//     width: 24px;
+//     margin-right: 5px;
+//     text-align: center;
+//     font-size: 18px;
+//     vertical-align: middle;
+//     color: #409EFF;
+//   }
+//   .bi{
+//     display: inline-block;
+//     width: 24px;
+//     margin-right: 5px;
+//     text-align: center;
+//     font-size: 18px;
+//     vertical-align: middle;
+//     color: #409EFF;
+//   }
+
+//   .active-icon {
+//     color: #ffd04b;
+//   }
+// }
+.navbar_page {
+  // overflow-y: scroll;
+  width: 200px;
+  .navbar {
+    height: calc(100vh - 50px);
+    width: 200px;
+    .nav-menu {
+      /* 指定菜单展开时的宽度，否则过渡动画不生效 */
+      width: 200px !important;
+      border-right: 0;
+      &.el-menu--collapse {
+        width: 64px;
       }
-      .el-dropdown-link.active{
-        color: #fff;
-        background: rgba($color: #000, $alpha: 0.2);
-        font-weight:bold;
-        border-radius: 23px;
+      &.horizontal-collapse-transition {
+        transition: 200px 0.3s ease-in-out;
       }
     }
-    .el-dropdown-menu__item{
-      .navbar-item{
-        color: #333;
-      }
-    }
-  .dsicon{
-    font-size: 22px;
-    vertical-align: -3px;
-    margin-right: 4px;
   }
-  a{
-    &:hover{
-      color: white;
-    }
+  .logo {
+    height: 50px;
+    font-size: 18px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    background-color: rgba(63, 67, 72, 0.5);
   }
+
+  .aside.collapsed .logo {
+    // background: #fff url('../assets/images/logo.png') center/auto 80% no-repeat;
+    // span {
+    //   display: none;
+    // }
+  }
+
 }
 
-.dropdown-css-k.el-dropdown-menu{
-    border:1px solid #1c63f3;
-    // display: block !important;
-    min-width: 150px;
-    border-radius: 0;
-    .el-dropdown-menu__item{
-      // font-size: 15px;
-      color: #222;
-      padding-left: 25px;
-      line-height: 36px;
-      border: 1px solid transparent;
-      &:hover{
-        color: white;
-        background-color: #1c63f3;
-        border: 1px solid white;
-      }
-    }
-}
 </style>
